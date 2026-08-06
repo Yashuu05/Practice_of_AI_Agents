@@ -1,0 +1,6 @@
+{
+    "response_1":{
+        "prompt":"What is 250 multiplied by 4, and then divided by 2?",
+        "output":["To find the result, we will follow the steps in order:**Step 1: Multiply 250 by 4**250 * 4 = 1,000**Step 2: Divide the result by 2**1,000 / 2 = 500The final result is **500**."]
+    }
+}
