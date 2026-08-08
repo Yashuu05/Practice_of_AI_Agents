@@ -11,3 +11,6 @@ wheels/
 
 # environment files
 .env
+
+# large datasets
+sql_agent/DataSource/
