@@ -1,0 +1,87 @@
+Agent Initiated.
+System Prompt read successful.
+================================ Human Message =================================
+
+Which Region has highest Profit?
+D:\projects\AgenticAI_Practice\.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3120: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+================================== Ai Message ==================================
+
+[]
+Tool Calls:
+  list_tables (6wTIJzYm)
+ Call ID: 6wTIJzYm
+  Args:
+================================= Tool Message =================================
+Name: list_tables
+
+Records
+D:\projects\AgenticAI_Practice\.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3120: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+================================== Ai Message ==================================
+
+[]
+Tool Calls:
+  sql_db_schema (dAYb1341)
+ Call ID: dAYb1341
+  Args:
+    table_names: Records
+================================= Tool Message =================================
+Name: sql_db_schema
+
+CREATE TABLE Records(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            Segment VARCHAR(50) NOT NULL,
+            City VARCHAR(30) NOT NULL,
+            State VARCHAR(30) NOT NULL,
+            Region VARCHAR(30) NOT NULL,
+            Category VARCHAR(50) NOT NULL,
+            SubCategory VARCHAR(50) NOT NULL,
+            Sales DECIMAL(10,2) NOT NULL,
+            Quantity INT NOT NULL,
+            Discount DECIMAL(10,2) NOT NULL,
+            Profit DECIMAL(10,2) NOT NULL
+        )
+
+/*
+3 rows from Records table:
+id      Segment City    State   Region  Category        SubCategory     Sales   Quantity        Discount    Profit
+1       Consumer        Henderson       Kentucky        South   Furniture       Bookcases       261.96      2       0       41.9136
+2       Consumer        Henderson       Kentucky        South   Furniture       Chairs  731.94  3  0219.582
+3       Corporate       Los Angeles     California      West    Office Supplies Labels  14.62   2  06.8714
+*/
+D:\projects\AgenticAI_Practice\.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3120: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+================================== Ai Message ==================================
+
+[]
+Tool Calls:
+  sql_db_query_checker (NzV9ic5E)
+ Call ID: NzV9ic5E
+  Args:
+    query: SELECT Region, SUM(Profit) AS Total_Profit FROM Records GROUP BY Region ORDER BY Total_Profit DESC LIMIT 1;
+D:\projects\AgenticAI_Practice\.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3120: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+================================= Tool Message =================================
+Name: sql_db_query_checker
+
+SELECT Region, SUM(Profit) AS Total_Profit FROM Records GROUP BY Region ORDER BY Total_Profit DESC LIMIT 1;
+D:\projects\AgenticAI_Practice\.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3120: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+================================== Ai Message ==================================
+
+[]
+Tool Calls:
+  sql_db_query (1Q4UK3TO)
+ Call ID: 1Q4UK3TO
+  Args:
+    query: SELECT Region, SUM(Profit) AS Total_Profit FROM Records GROUP BY Region ORDER BY Total_Profit DESC LIMIT 1;
+================================= Tool Message =================================
+Name: sql_db_query
+
+[('West', 736.2551)]
+D:\projects\AgenticAI_Practice\.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3120: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+================================== Ai Message ==================================
+
+[{'type': 'text', 'text': 'The West region has the highest profit, with a total profit of approximately 736.26.', 'extras': {'signature': 'EjQKMgERTTIPgQCFz6uUodrvbV8SAG5uyo2MaKJnFl+eEu0Ii1zD+m44s+R48SNpQYK3nf40'}}]
