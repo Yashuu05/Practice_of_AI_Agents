@@ -1,56 +1,46 @@
 What is an AI agent?
 AI agents are software systems that use AI to pursue goals and complete tasks on behalf of users. They show reasoning, planning, and memory and have a level of autonomy to make decisions, learn, and adapt.
-Their capabilities are made possible in large part by the multimodal capacity of generative AI and AI foundation models. AI agents can process multimodal information like text, voice, video, audio, code, and 
-more simultaneously; can converse, reason, learn, and make decisions. They can learn over time and facilitate transactions and business processes. Agents can work with other agents to coordinate and perform more complex workflows.
+Their capabilities are made possible in large part by the multimodal capacity of generative AI and AI foundation models. AI agents can process multimodal information like text, voice, video, audio, code, and more simultaneously; can converse, reason, learn, and make decisions. They can learn over time and facilitate transactions and business processes. Agents can work with other agents to coordinate and perform more complex workflows.
 
 Key features of an AI agent
-As explained above, while the key features of an AI agent are reasoning and acting (as described in ReAct Framework) more features have evolved over time.
-Reasoning: This core cognitive process involves using logic and available information to draw conclusions, make inferences, and solve problems. AI agents with strong reasoning capabilities can analyze data, identify patterns, and 
+1. Reasoning: This core cognitive process involves using logic and available information to draw conclusions, make inferences, and solve problems. AI agents with strong reasoning capabilities can analyze data, identify patterns, and 
 make informed decisions based on evidence and context.
-Acting: The ability to take action or perform tasks based on decisions, plans, or external input is crucial for AI agents to interact with their environment and achieve goals. This can include physical actions in the case of embodied 
+2. Acting: The ability to take action or perform tasks based on decisions, plans, or external input is crucial for AI agents to interact with their environment and achieve goals. This can include physical actions in the case of embodied 
 AI, or digital actions like sending messages, updating data, or triggering other processes.
-Observing: Gathering information about the environment or situation through perception or sensing is essential for AI agents to understand their context and make informed decisions. This can involve various forms of perception, such 
+3. Observing: Gathering information about the environment or situation through perception or sensing is essential for AI agents to understand their context and make informed decisions. This can involve various forms of perception, such 
 as computer vision, natural language processing, or sensor data analysis.
-Planning: Developing a strategic plan to achieve goals is a key aspect of intelligent behavior. AI agents with planning capabilities can identify the necessary steps, evaluate potential actions, and choose the best course of action 
+4. Planning: Developing a strategic plan to achieve goals is a key aspect of intelligent behavior. AI agents with planning capabilities can identify the necessary steps, evaluate potential actions, and choose the best course of action 
 based on available information and desired outcomes. This often involves anticipating future states and considering potential obstacles.
-Collaborating: Working effectively with others, whether humans or other AI agents, to achieve a common goal is increasingly important in complex and dynamic environments. Collaboration requires communication, coordination, and the 
+5. Collaborating: Working effectively with others, whether humans or other AI agents, to achieve a common goal is increasingly important in complex and dynamic environments. Collaboration requires communication, coordination, and the 
 ability to understand and respect the perspectives of others.
-Self-refining: The capacity for self-improvement and adaptation is a hallmark of advanced AI systems. AI agents with self-refining capabilities can learn from experience, adjust their behavior based on feedback, and continuously enhance 
+6. Self-refining: The capacity for self-improvement and adaptation is a hallmark of advanced AI systems. AI agents with self-refining capabilities can learn from experience, adjust their behavior based on feedback, and continuously enhance 
 their performance and capabilities over time. This can involve machine learning techniques, optimization algorithms, or other forms of self-modification.
 
 How do AI agents work?
 Every agent defines its role, personality, and communication style, including specific instructions and descriptions of available tools. 
 
-Persona: A well defined persona allows an agent to maintain a consistent character and behave in a manner appropriate to its assigned role, evolving as the agent gains experience and interacts with its environment.
-Memory: The agent is equipped in general with short term, long term, consensus, and episodic memory. Short term memory for immediate interactions, long-term memory for historical data and conversations, episodic memory for past interactions, 
+1. Persona: A well defined persona allows an agent to maintain a consistent character and behave in a manner appropriate to its assigned role, evolving as the agent gains experience and interacts with its environment.
+2. Memory: The agent is equipped in general with short term, long term, consensus, and episodic memory. Short term memory for immediate interactions, long-term memory for historical data and conversations, episodic memory for past interactions, 
 and consensus memory for shared information among agents. The agent can maintain context, learn from experiences, and improve performance by recalling past interactions and adapting to new situations.
-Tools: Tools are functions or external resources that an agent can utilize to interact with its environment and enhance its capabilities. They allow agents to perform complex tasks by accessing information, manipulating data, or controlling 
+3. Tools: Tools are functions or external resources that an agent can utilize to interact with its environment and enhance its capabilities. They allow agents to perform complex tasks by accessing information, manipulating data, or controlling 
 external systems, and can be categorized based on their user interface, including physical, graphical, and program-based interfaces. Tool learning involves teaching agents how to effectively use these tools by understanding their functionalities 
 and the context in which they should be applied.
-Model: Large language models (LLMs) serve as the foundation for building AI agents, providing them with the ability to understand, reason, and act. LLMs act as the "brain" of an agent, enabling them to process and generate language, while other 
+4. Model: Large language models (LLMs) serve as the foundation for building AI agents, providing them with the ability to understand, reason, and act. LLMs act as the "brain" of an agent, enabling them to process and generate language, while other 
 components facilitate reason and action.
 
 What are the types of agents in AI?
-AI agents can be categorized in various ways based on their capabilities, roles, and environments. Here are some key categories of agents:
-There are different definitions of agent types and agent categories. 
-
-Based on interaction
-One way to categorize agents is by how they interact with users. Some agents engage in direct conversation, while others operate in the background, performing tasks without direct user input: 
-Interactive partners (also known as, surface agents): Assisting us with tasks like customer service, healthcare, education, and scientific discovery, providing personalized and intelligent support. Conversational agents include Q&A, chit chat, and 
-world knowledge interactions with humans. They are generally user query triggered and fulfill user queries or transactions.
-Autonomous background processes (also known as, background agents): Working behind the scenes to automate routine tasks, analyze data for insights, optimize processes for efficiency, and proactively identify and address potential issues. They include 
-workflow agents. They have limited or no human interaction and are generally driven by events and fulfill queued tasks or chains of tasks.
-Based on number of agents
-Single agent: Operate independently to achieve a specific goal. They utilize external tools and resources to accomplish tasks, enhancing their functional capabilities in diverse environments. They are best suited for well defined tasks that do not 
-require collaboration with other AI agents. Can only handle one foundation model for its processing.
-Multi-agent: Multiple AI agents that collaborate or compete to achieve a common objective or individual goals. These systems leverage the diverse capabilities and roles of individual agents to tackle complex tasks. Multi-agent systems can simulate 
-human behaviors, such as interpersonal communication, in interactive scenarios. Each agent can have different foundation models that best fit their needs.
+1. Simple Reflex Agents: Act strictly on current percepts using condition-action rules (if-then statements). They possess no memory of past states.Example: Thermostats or automatic light switches.
+2. Model-Based Reflex Agents: Maintain an internal state to track aspects of the environment that cannot be seen right now, handling partial observability.Example: Robot vacuum cleaners mapping a room.
+3. Goal-Based Agents: Extend model-based systems by incorporating explicit goals. They plan sequences of actions to navigate future states and reach objectives.Example: GPS route-finding navigation systems.
+4. Utility-Based Agents: Go beyond simple target goals by measuring how desirable a specific outcome is using a utility function, allowing them to balance trade-offs like speed, cost, and safety.Example: Financial portfolio management and algorithmic stock trading.
+5. Learning Agents: Separate learning from execution, using a critic and learning element to adapt behavior, correct errors, and improve performance over time.Example: Adaptive recommendation engines or advanced conversational assistants
 
 Challenges with using AI agents
 While AI agents offer many benefits, there are also some challenges associated with their use:
-Tasks requiring deep empathy / emotional intelligence or requiring complex human interaction and social dynamics – AI agents can struggle with nuanced human emotions. Tasks like therapy, social work, or conflict resolution require a level of emotional
-understanding and empathy that AI currently lacks. They may falter in complex social situations that require understanding unspoken cues.
-Situations with high ethical stakes – AI agents can make decisions based on data, but they lack the moral compass and judgment needed for ethically complex situations. This includes areas like law enforcement, healthcare (diagnosis and treatment), and 
+1. Tasks requiring deep empathy / emotional intelligence or requiring complex human interaction and social dynamics – AI agents can struggle with nuanced human emotions. Tasks like therapy, social work, or conflict resolution require a level of emotional
+understanding and empathy that AI currently lacks. 
+2. They may falter in complex social situations that require understanding unspoken cues.
+3. ituations with high ethical stakes – AI agents can make decisions based on data, but they lack the moral compass and judgment needed for ethically complex situations. This includes areas like law enforcement, healthcare (diagnosis and treatment), and 
 judicial decision-making.   
-Domains with unpredictable physical environments – AI agents can struggle in highly dynamic and unpredictable physical environments where real-time adaptation and complex motor skills are essential. This includes tasks like surgery, certain types of construction work, and disaster response.
-Resource-intensive applications – Developing and deploying sophisticated AI agents can be computationally expensive and require significant resources, potentially making them unsuitable for smaller projects or organizations with limited budgets.
+4. Domains with unpredictable physical environments – AI agents can struggle in highly dynamic and unpredictable physical environments where real-time adaptation and complex motor skills are essential. This includes tasks like surgery, certain types of construction work, and disaster response.
+5. Resource-intensive applications – Developing and deploying sophisticated AI agents can be computationally expensive and require significant resources, potentially making them unsuitable for smaller projects or organizations with limited budgets.
