@@ -1,0 +1,65 @@
+[
+    {
+        "name": "Courtyard by Marriott Paris Gare de Lyon",
+        "type": "hotel",
+        "description": "Modern hotel featuring streamlined quarters, some with city views, plus dining & a fitness center.",
+        "rating": 4.4,
+        "reviews_count": 1703,
+        "price_per_night": null,
+        "total_price": null,
+        "link": "https://www.marriott.com/en-us/hotels/pargl-courtyard-paris-gare-de-lyon/overview/?scid=f2ae0541-1279-4f24-b197-a979c79310b0",
+        "amenities": [
+            "Breakfast ($)",
+            "Wi-Fi ($)",
+            "Parking ($)",
+            "Air conditioning",
+            "Fitness center"
+        ],
+        "gps_coordinates": {
+            "latitude": 48.8450789,
+            "longitude": 2.3712402
+        }
+    },
+    {
+        "name": "Hilton Garden Inn Paris La Villette",
+        "type": "hotel",
+        "description": "No description available",
+        "rating": 4.4,
+        "reviews_count": 488,
+        "price_per_night": null,
+        "total_price": null,
+        "link": "https://www.hilton.com/en/hotels/orygigi-hilton-garden-inn-paris-la-villette/?SEO_id=GMB-EMEA-GI-ORYGIGI",
+        "amenities": [
+            "Breakfast ($)",
+            "Free Wi-Fi",
+            "Air conditioning",
+            "Pet-friendly",
+            "Fitness center"
+        ],
+        "gps_coordinates": {
+            "latitude": 48.8960978,
+            "longitude": 2.3827987
+        }
+    },
+    {
+        "name": "H\u00f4tel La Comtesse Tour Eiffel",
+        "type": "hotel",
+        "description": "Traditional lodging offering classic rooms with free Wi-Fi & views of the Eiffel Tower.",
+        "rating": 4.6,
+        "reviews_count": 1237,
+        "price_per_night": null,
+        "total_price": null,
+        "link": "http://www.comtesse-hotel.com/",
+        "amenities": [
+            "Breakfast",
+            "Free Wi-Fi",
+            "Parking",
+            "Air conditioning",
+            "Fitness center"
+        ],
+        "gps_coordinates": {
+            "latitude": 48.8539026,
+            "longitude": 2.3072121
+        }
+    }
+]
