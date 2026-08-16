@@ -6,14 +6,8 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 from ensure import ensure_annotations
 import pandas as pd 
-import kagglehub
 
 DATA_SAVE_PATH = os.path.join(project_root, "sql_agent", "DataSource", "SampleSuperstore.csv")
-
-def download_from_kaggle():
-    # Download latest version
-    file_path = kagglehub.dataset_download("bravehart101/sample-supermarket-dataset")
-    print("Path to dataset files:", file_path)
 
 @ensure_annotations
 def prepare_smaller_data(file_path: str, column_lst: list, no_of_rows: int):
@@ -104,9 +98,7 @@ def store_into_db(df: pd.DataFrame, db_path: str = "Superstore.db"):
 if __name__ == "__main__":
     os.path.exists(path=DATA_SAVE_PATH)
     col_lst = ['Segment','City','State','Region','Category','Sub-Category','Sales','Quantity','Discount','Profit']
-    #print("downloading...")
-    # download_from_kaggle()
-    #print("downloaded.")
+
     print("program initiated")
     df = prepare_smaller_data(file_path=DATA_SAVE_PATH, column_lst=col_lst, no_of_rows=50)
     if df is None:

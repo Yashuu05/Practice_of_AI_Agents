@@ -21,19 +21,21 @@ class Coordinates(BaseModel):
 
 def corrdinates_model(web_content: str) -> tuple:
     model = init_chat_model(
-        model="gemma3:1b",
+        model="llama3.1:4b",
         model_provider="ollama",
-        temperature=0.5,
+        temperature=0.3,
     )
     model_with_structure = model.with_structured_output(Coordinates)
     response = model_with_structure.invoke(f"Extract only Latitude and Longitude from given text. Example: Latitude:40.73061\nlongitude:73.935242\nContent: {web_content}")
     
     if response:
         return response.latitude, response.longitude
+
+    print("No response found.")
     return None, None
 
 # get weather details dataframe
-def get_weather(latitude:float, longitude:float, timezone:str, forecast_days=1, weather_url=URL):
+def get_weather(latitude:float, longitude:float, timezone:str, forecast_days=3, weather_url=URL):
     cache_session = requests_cache.CachedSession('.cache', expire_after = 3600)
     retry_session = retry(cache_session, retries = 3, backoff_factor = 0.2)
     openmeteo = openmeteo_requests.Client(session = retry_session)
@@ -41,7 +43,7 @@ def get_weather(latitude:float, longitude:float, timezone:str, forecast_days=1, 
     params = {
         "latitude":latitude,
         "longitude":longitude,
-        "hourly":["temperature_2m", "rain", "visibility", "wind_speed_80m", "precipitation_probability"],
+        "Daily":["temperature_2m", "rain", "visibility", "wind_speed_80m", "precipitation_probability"],
         "timezone": timezone,
         "forecast_days":forecast_days,
         "temperature_unit":"celsius",
