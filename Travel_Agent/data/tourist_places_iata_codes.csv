@@ -1,0 +1,88 @@
+﻿country,city_name,airport_name,code
+Iceland,Reykjavik,Keflavik International Airport,KEF
+Iceland,Reykjavik,Reykjavík Domestic Airport,RKV
+United Kingdom,London,London Heathrow Airport,LHR
+United Kingdom,London,London Gatwick Airport,LGW
+United Kingdom,London,London City Airport,LCY
+United Kingdom,London,London Stansted Airport,STN
+United Kingdom,London,London Luton Airport,LTN
+United Kingdom,London,London Southend Airport,SEN
+France,Paris,Charles de Gaulle International Airport,CDG
+France,Paris,Paris-Orly Airport,ORY
+Spain,Barcelona,Josep Tarradellas Barcelona-El Prat Airport,BCN
+Italy,Rome,Rome–Fiumicino Leonardo da Vinci International Airport,FCO
+Italy,Rome,Ciampino–G. B. Pastine International Airport,CIA
+Italy,Venice,Venice Marco Polo Airport,VCE
+Italy,Venice,Treviso Airport,TSF
+Greece,Athens,Athens Eleftherios Venizelos International Airport,ATH
+Türkiye,Istanbul,İstanbul Airport,IST
+Türkiye,Istanbul,Istanbul Sabiha Gökçen International Airport,SAW
+Czechia,Prague,Václav Havel Airport Prague,PRG
+Austria,Vienna,Vienna International Airport,VIE
+Netherlands,Amsterdam,Amsterdam Airport Schiphol,AMS
+Croatia,Dubrovnik,Dubrovnik Ruđer Bošković Airport,DBV
+Egypt,Cairo,Cairo International Airport,CAI
+Morocco,Marrakesh,Marrakesh Menara Airport,RAK
+South Africa,Cape Town,Cape Town International Airport,CPT
+Zimbabwe,Victoria Falls,Victoria Falls International Airport,VFA
+Tanzania,Zanzibar City,Abeid Amani Karume International Airport,ZNZ
+Kenya,Nairobi,Jomo Kenyatta International Airport,NBO
+United States,New York City,John F. Kennedy International Airport,JFK
+United States,New York City,LaGuardia Airport,LGA
+United States,New York City,Newark Liberty International Airport,EWR
+United States,Los Angeles,Los Angeles International Airport,LAX
+United States,Los Angeles,Hollywood Burbank/Bob Hope Airport,BUR
+United States,San Francisco,San Francisco International Airport,SFO
+United States,San Francisco,Oakland San Francisco Bay Airport,OAK
+United States,Orlando,Orlando International Airport,MCO
+United States,Orlando,Orlando Sanford International Airport,SFB
+United States,Las Vegas,Harry Reid International Airport,LAS
+United States,Honolulu,Daniel K. Inouye International Airport,HNL
+Canada,Vancouver,Vancouver International Airport,YVR
+Mexico,Mexico City,Mexico City Benito Juárez International Airport,MEX
+Mexico,Mexico City,Felipe Ángeles International Airport,NLU
+Mexico,Cancún,Cancún International Airport,CUN
+Cuba,Havana,José Martí International Airport,HAV
+Brazil,Rio de Janeiro,Rio Galeão – Tom Jobim International Airport,GIG
+Brazil,Rio de Janeiro,Santos Dumont Airport,SDU
+Argentina,Buenos Aires,Ezeiza International Airport - Ministro Pistarini,EZE
+Argentina,Buenos Aires,Aeroparque Jorge Newbery,AEP
+Peru,Lima,Jorge Chávez International Airport,LIM
+Peru,Cusco,Alejandro Velasco Astete International Airport,CUZ
+Colombia,Cartagena,Rafael Nuñez International Airport,CTG
+Chile,Santiago,Comodoro Arturo Merino Benítez International Airport,SCL
+Ecuador,Quito,Mariscal Sucre International Airport,UIO
+Ecuador,Galápagos Islands,Seymour Galapagos Ecological Airport,GPS
+Ecuador,Galápagos Islands,San Cristóbal Airport,SCY
+Ecuador,Galápagos Islands,General Villamil Airport,IBB
+Japan,Tokyo,Tokyo Haneda International Airport,HND
+Japan,Tokyo,Narita International Airport,NRT
+Japan,Kyoto,Osaka Itami International Airport,ITM
+Japan,Kyoto,Kansai International Airport,KIX
+South Korea,Seoul,Incheon International Airport,ICN
+South Korea,Seoul,Seoul Gimpo International Airport,GMP
+China,Beijing,Beijing Capital International Airport,PEK
+China,Beijing,Beijing Daxing International Airport,PKX
+China,Shanghai,Shanghai Pudong International Airport,PVG
+China,Shanghai,Shanghai Hongqiao International Airport,SHA
+China,Hong Kong,Hong Kong International Airport,HKG
+Singapore,Singapore,Singapore Changi Airport,SIN
+Thailand,Bangkok,Suvarnabhumi Airport,BKK
+Thailand,Bangkok,Don Mueang International Airport,DMK
+Indonesia,Bali,Denpasar I Gusti Ngurah Rai International Airport,DPS
+Vietnam,Hanoi,Noi Bai International Airport,HAN
+Nepal,Kathmandu,Tribhuvan International Airport,KTM
+India,Agra,Agra Airport / Agra Air Force Station,AGR
+United Arab Emirates,Dubai,Dubai International Airport,DXB
+United Arab Emirates,Dubai,Al Maktoum International Airport,DWC
+Israel,Jerusalem,Ben Gurion International Airport,TLV
+Australia,Sydney,Sydney Kingsford Smith International Airport,SYD
+Australia,Melbourne,Melbourne Airport,MEL
+Australia,Melbourne,Melbourne Avalon International Airport,AVV
+New Zealand,Auckland,Auckland International Airport,AKL
+New Zealand,Queenstown,Queenstown Airport,ZQN
+French Polynesia,Papeete,Fa'a'ā International Airport,PPT
+India,Mumbai,Chhatrapati Shivaji Maharaj International Airport,BOM
+India,Mumbai,Navi Mumbai International Airport,NMI
+India,Delhi,Indira Gandhi International Airport,DEL
+India,Bangalore,Kempegowda International Airport Bengaluru,BLR

@@ -24,7 +24,7 @@ def fetch_and_extract_hotels(query="Hotels nearby Paris", check_in_date="2026-08
             "check_out_date": check_out_date,
             "adults": 4,
             "hotel_class": 4,
-            "currency": "INR" # Fixed typo from 'cuurency'
+            "currency": "INR" 
         })
         
         properties = results.get("properties", [])

@@ -9,7 +9,7 @@ from datetime import datetime
 
 class DataIngestion:
 
-    def create_database(self, db_name:str="TouristPlace.db", table_name:str="coordinates") -> None:
+    def create_database(self, db_name:str="CityCode.db", table_name:str="code") -> None:
         """
         - creates new sqlite3 database 
         - input:
@@ -25,10 +25,10 @@ class DataIngestion:
             print(f"{datetime.now().strftime('%H:%M:%S')} : creating {table_name} table...")
             cursor.execute(f"""
             CREATE TABLE IF NOT EXISTS {table_name} (
-                latitude DECIMAL(10,2) NOT NULL,
-                longitude DECIMAL(10,2) NOT NULL,
-                City VARCHAR(50) UNIQUE,
-                Country VARCHAR(50)
+                country VARCHAR(30),
+                city_name VARCHAR(30),
+                airport_name VARCHAR(50),
+                code VARCHAR(10) PRIMARY KEY NOT NULL
             );            
             """)
             conn.commit()
@@ -55,11 +55,11 @@ class DataIngestion:
             print("reading dataset...")
             df = pd.read_csv(data_path)
             if not df.empty:
-                print("processing dataset...")
+                #print("processing dataset...")
                 print(f"{df.head(2)}")
-                df[['City', 'Country']] = df['place'].str.split(', ', expand=True)
-                df = df.drop("place", axis=1)
-                print(f"{df.head(2)}")
+                #df[['City', 'Country']] = df['place'].str.split(', ', expand=True)
+                #df = df.drop("place", axis=1)
+                #print(f"{df.head(2)}")
                 print(f"inserting data to {db_path}")
                 conn = sqlite3.connect(db_path)
                 df.to_sql(f"{table_name}", conn, if_exists="append", index=False)
@@ -72,9 +72,10 @@ class DataIngestion:
 if __name__ == "__main__":
 
     obj = DataIngestion()
-    obj.create_database(db_name="TouristPlace.db", table_name="coordinates")
+    obj.create_database(db_name="CityCode.db", table_name="code")
+    os.path.exists("D:\projects\AgenticAI_Practice\Travel_Agent\db\CityCode.db")
     obj.insert_data_to_database(
-        db_path=r"D:\projects\AgenticAI_Practice\Travel_Agent\db\TouristPlace.db",
-        data_path=r"D:\projects\AgenticAI_Practice\Travel_Agent\data\tourist_places_coordinates.csv",
-        table_name="coordinates"
+        db_path=r"D:\projects\AgenticAI_Practice\Travel_Agent\db\CityCode.db",
+        data_path=r"D:\projects\AgenticAI_Practice\Travel_Agent\data\tourist_places_iata_codes.csv",
+        table_name="code"
     )
