@@ -1,5 +1,45 @@
 {
-    "best_flights": [],
-    "other_flights": [],
-    "price_insights": {}
+    "best_flights": [
+        {
+            "airline": "JetBlue",
+            "flight_number": "B6 2220",
+            "departure_airport": "LHR",
+            "arrival_airport": "JFK",
+            "departure_time": "Unknown",
+            "arrival_time": "Unknown",
+            "duration_minutes": 492,
+            "price_usd": 2439,
+            "layovers": 0
+        },
+        {
+            "airline": "JetBlue",
+            "flight_number": "B6 20",
+            "departure_airport": "LHR",
+            "arrival_airport": "JFK",
+            "departure_time": "Unknown",
+            "arrival_time": "Unknown",
+            "duration_minutes": 498,
+            "price_usd": 2439,
+            "layovers": 0
+        },
+        {
+            "airline": "British Airways",
+            "flight_number": "BA 117",
+            "departure_airport": "LHR",
+            "arrival_airport": "JFK",
+            "departure_time": "Unknown",
+            "arrival_time": "Unknown",
+            "duration_minutes": 470,
+            "price_usd": 3668,
+            "layovers": 0
+        }
+    ],
+    "price_insights": {
+        "lowest_price": 2439,
+        "price_level": "high",
+        "typical_price_range": [
+            1250,
+            1800
+        ]
+    }
 }
