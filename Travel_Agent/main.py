@@ -7,7 +7,7 @@ import os
 import sys 
 from tavily import TavilyClient
 from dotenv import load_dotenv
-import sqlite3
+import serpapi
 import pandas as pd
 import openmeteo_requests
 import requests_cache
@@ -15,6 +15,7 @@ from retry_requests import retry
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
+from utils import get_iata_by_city, fetch_corrdinates
 
 load_dotenv()
 
@@ -73,48 +74,167 @@ class SubAgents:
 
         traveller_agent = create_agent(
             model=travel_model,
-            tools=[calculator_tool, weather_tool, web_search_tool],
+            tools=[calculator_tool, weather_tool, web_search_tool, fetch_and_extract_hotels, fetch_flights],
             system_prompt=system_msg
         )
 
         return traveller_agent
 
-
-def fetch_corrdinates(city: str, country: str, db_name:str, table_name: str):
-    db_path = os.path.join(project_root,"Travel_Agent","db",f"{db_name}")
-
+# fetch hotel details
+@tool("hotel_tool", description="fetch hotel details for given place")
+def fetch_and_extract_hotels(place:str, check_in_date:None | str, check_out_date:None|str, adults:int, hotel_class:int, limit:int=3):
+    """
+    Fetches hotel data from Google Hotels API using SerpApi and extracts structured, useful information.
+    
+    Args:
+    - place: name of place to search hotels in.
+    - check_in_date: hotel check in date
+    - check_out_date: hotel check out date
+    - adults: number of adults
+    - hotel_class: class hotel (1 to 5)
+    - limit: number of search results (1 to 5)
+    """
+    serpapi_key = os.getenv("SERPAPI_KEY")
+    
+    if not serpapi_key:
+        print("Error: No API key found. Please set SERPAPI_API in your .env file.")
+        return None
+        
+    client = serpapi.Client(api_key=serpapi_key)
     try:
-        if os.path.exists(db_path):
-            conn = sqlite3.connect(db_path)
-            cursor = conn.cursor()
-            if city and country=="":
-                cursor.execute(f"""
-                    SELECT latitude, longitude
-                    FROM {table_name}
-                    WHERE City LIKE '%{city}%'
-                """)
-                return cursor.fetchall()
+        print(f"API KEY founf. Fetching hotel details for {place}...")
+        # Fetch raw results
+        results = client.search({
+            "engine": "google_hotels",
+            "q": f"hotels nearby {place}",
+            "check_in_date": check_in_date,
+            "check_out_date": check_out_date,
+            "adults": adults,
+            "hotel_class": hotel_class,
+            "currency": "INR" 
+        })
 
-            elif country and city=="":
-                cursor.execute(f"""
-                    SELECT latitude, longitude
-                    FROM {table_name}
-                    WHERE Country LIKE '%{country}%'
-                """)
-                return cursor.fetchall()
-
-            elif city and country:
-                cursor.execute(f"""
-                    SELECT latitude, longitude
-                    FROM {table_name}
-                    WHERE City LIKE '%{city}%' AND Country LIKE '%{country}%'
-                """)
-                return cursor.fetchall()
-
-            else:
-                return "Error: No value for city and country provided"
+        properties = results.get("properties", [])
+        extracted_data = []
+        
+        # Extract structured data and limit the results
+        for prop in properties[:limit]:
+            hotel_info = {
+                "name": prop.get("name"),
+                "type": prop.get("type"),
+                "description": prop.get("description", "No description available"),
+                "rating": prop.get("overall_rating", "N/A"),
+                "reviews_count": prop.get("reviews", 0),
+                "price_per_night": prop.get("rate_per_night", {}).get("lowest"),
+                "total_price": prop.get("total_rate", {}).get("lowest"),
+                "link": prop.get("link", prop.get("serpapi_property_details_link")),
+                "amenities": prop.get("amenities", [])[:5], # Limit to top 5 amenities
+                "gps_coordinates": prop.get("gps_coordinates")
+            }
+            extracted_data.append(hotel_info)
+            
+        return extracted_data
     except Exception as e:
-        return e
+        print(f"Error fetching data: {e}")
+        return None
+
+@tool("fetch_flights", description="fetch flight details")
+def fetch_flights(outbound_date, return_date=None, dest_city="",dest_country="",source_city="", source_country="",trip_type="2", adults:int=1, travel_class="1"):
+    """
+    Fetch flight details using Serpapi Google Flights API.
+
+    Parameters:
+    - outbound_date: str, format "YYYY-MM-DD"
+    - return_date: str, format "YYYY-MM-DD" (optional, required if trip_type is "1")
+    - dest_city: str, destination city 
+    - dest_country: str, destination country
+    - source_city: str, source city
+    - source_country: str, source country
+    - trip_type: str, "1" for Round trip, "2" for One way
+    - adults: int, number of adult passengers
+    - travel_class: str, "1" (Economy), "2" (Premium economy), "3" (Business), "4" (First)
+    """
+    # Retrieve API key from environment
+    api_key = os.getenv("SERPAPI_KEY")
+    if not api_key:
+        print("Error: SERPAPI_KEY not found in environment variables.")
+        return None
+    try:
+
+        client = serpapi.Client(api_key=api_key)
+        print("API KEY found. Implementing flight search...")
+
+        # get departure_id and arrival_id for source place
+        print("fetching arrival_id...")
+        arrival_code, airport_arrival = get_iata_by_city(
+            city_name=source_city,
+            country_name=source_country,
+            db_path=os.path.join(project_root, "db", "CityCode.db")
+        )
+        print("fetching departure_id...")
+        departure_code, airport_destination = get_iata_by_city(
+            city_name=dest_city,
+            country_name=dest_country,
+            db_path=os.path.join(project_root, "db", "CityCode.db")
+        )
+        if departure_code and arrival_code:
+            print(f"arrival_id:{arrival_code}, departure_id: {departure_code}")
+            # Base parameters for the search
+            params = {
+            "engine": "google_flights",
+            "departure_id": departure_code,
+            "arrival_id": arrival_code,
+            "outbound_date": outbound_date,
+            "type": trip_type,
+            "adults": str(adults),
+            "travel_class": travel_class,
+            "currency": "USD",
+            "hl": "en",
+            "gl": "us"
+            }
+
+            # Add return date if round trip is selected
+            if trip_type == "1" and return_date:
+                params["return_date"] = return_date
+
+            try:
+                print(f"Fetching flights from {departure_code} to {arrival_code} on {outbound_date}...")
+                results = client.search(params)
+        
+                # Structure the extracted data
+                structured_data = {
+                    "best_flights": [],
+                    "price_insights": results.get("price_insights", {})
+                }
+
+                # Extract 3 best flights
+                if "best_flights" in results:
+                    for flight in results["best_flights"][:3]:
+                        flight_info = {
+                        "airline": flight.get("flights", [{}])[0].get("airline", "Unknown"),
+                        "flight_number": flight.get("flights", [{}])[0].get("flight_number", "Unknown"),
+                        "departure_airport": flight.get("flights", [{}])[0].get("departure_airport", {}).get("id", departure_code),
+                        "arrival_airport": flight.get("flights", [{}])[-1].get("arrival_airport", {}).get("id", arrival_code),
+                        "departure_time": flight.get("flights", [{}])[0].get("departure_time", "Unknown"),
+                        "arrival_time": flight.get("flights", [{}])[-1].get("arrival_time", "Unknown"),
+                        "duration_minutes": flight.get("total_duration", 0),
+                        "price_usd": flight.get("price", "Unknown"),
+                        "layovers": len(flight.get("flights", [])) - 1
+                        }
+                        structured_data["best_flights"].append(flight_info)
+                
+                return structured_data
+
+            except Exception as e:
+                print(f"An error occurred: {e}")
+                return None
+        else:
+            print("No arrival_id and departure_id found")
+            return None
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return None 
 
 # CALCULATOR TOOL
 @tool("calculator_tool", description="Tool to perform basic arithmetic operations. Input operations: 'add', 'subtract', 'multiply', 'divide'")

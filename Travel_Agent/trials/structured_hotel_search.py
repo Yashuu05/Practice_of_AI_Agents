@@ -3,9 +3,17 @@ import json
 from dotenv import load_dotenv
 import serpapi
 
-def fetch_and_extract_hotels(query="Hotels nearby Paris", check_in_date="2026-08-15", check_out_date="2026-08-16", limit=3):
+def fetch_and_extract_hotels(place:str, check_in_date:None | str, check_out_date:None|str, adults:int, hotel_class:int, limit:int=3):
     """
     Fetches hotel data from Google Hotels API using SerpApi and extracts structured, useful information.
+    
+    Args:
+    - place: name of place to search hotels in.
+    - check_in_date: hotel check in date
+    - check_out_date: hotel check out date
+    - adults: number of adults
+    - hotel_class: class hotel (1 to 5)
+    - limit: number of search results (1 to 5)
     """
     load_dotenv()
     serpapi_key = os.getenv("SERPAPI_KEY")
@@ -16,17 +24,18 @@ def fetch_and_extract_hotels(query="Hotels nearby Paris", check_in_date="2026-08
         
     client = serpapi.Client(api_key=serpapi_key)
     try:
+        print(f"API KEY founf. Fetching hotel details for {place}...")
         # Fetch raw results
         results = client.search({
             "engine": "google_hotels",
-            "q": query,
+            "q": f"hotels nearby {place}",
             "check_in_date": check_in_date,
             "check_out_date": check_out_date,
-            "adults": 4,
-            "hotel_class": 4,
+            "adults": adults,
+            "hotel_class": hotel_class,
             "currency": "INR" 
         })
-        
+
         properties = results.get("properties", [])
         extracted_data = []
         
