@@ -4,3 +4,4 @@ google-genai
 python-dotenv
 langchain_google_vertexai
 fastmcp
+prefect
